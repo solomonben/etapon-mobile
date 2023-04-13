@@ -1,0 +1,98 @@
+<ion-accordion value="{{ accordionName }}">
+  <ion-item slot="header" color="primary">
+    <ion-icon name="person-outline" color="tertiary" slot="start"></ion-icon>
+    <ion-label>
+      <h5><b>{{ collectorName }}</b> <i *ngIf="rated == 'false'"> (Rate)</i></h5>
+        <small><i>{{ dateTime }}</i></small>
+    </ion-label>
+  </ion-item>
+  <div class="ion-padding" slot="content">
+    <ion-list lines="inset">
+      <ion-item>
+        <ion-icon name="location-outline" color="secondary" slot="start"></ion-icon>
+        <ion-label>
+          <b>{{ address }}</b>  
+        </ion-label>
+        
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <b>{{ noBio }}x Biodegradeble</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ priceBio }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <b>{{ noNonBio }}x Non-Biodegradeble</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ priceNonBio }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <b>{{ noRecyc }}x Recyclable</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ priceRecyc }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <b>Subtotal</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ subtotal }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <b>Collector Fee</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ collectorFee }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <b>Total</b>
+            </ion-col>
+            <ion-col class="ion-text-end" size="auto">
+              Php{{ total }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <div class="ion-margin"  *ngIf="rated == 'false'">
+        <form (ngSubmit)="rateCollectorService()">
+          <ion-text><b>Rate your Collector:</b></ion-text>
+          <ion-range [(ngModel)]="rating" name="rating" aria-label="Range with ticks" [ticks]="true" [snaps]="true" [min]="1" [max]="5" [pin]="true" [pinFormatter]="pinFormatter"></ion-range>
+          <ion-item>
+            <ion-textarea [(ngModel)]="message" name="message" placeholder="Comments..."></ion-textarea>
+          </ion-item>
+          
+          <ion-button expand="full" color="primary" type="submit">Submit</ion-button>
+        </form>
+        
+        <!-- <ion-button expand="full" color="primary">Book Again</ion-button> -->
+      </div>
+      <ion-item *ngIf="rated == 'true'">
+        <ion-label><b>Rating:</b> {{ rated_rating }}★</ion-label>
+      </ion-item>
+      <ion-item *ngIf="rated == 'true'">
+        <ion-label><b>Comment:</b> {{ rated_comment }}</ion-label>
+      </ion-item>
+
+      
+    </ion-list>
+        
+  </div>
+</ion-accordion>

@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-text color="light">
+        <h1 *ngIf="user_type == 'customer'">History</h1>
+        <h1 *ngIf="user_type == 'collector'">Feedbacks</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <div class="ion-margin"></div>
+  <ion-accordion-group *ngIf="user_type == 'customer'">
+    <app-booking-history-accordion
+      *ngFor="let item of bookings" 
+      accordionName="{{ item._id }}"
+      collectorName="{{ item.collector.name }}"
+      address="{{ item.address.house }}, {{ item.address.purok }}, {{ item.address.barangay }}"
+      dateTime="{{ item.createdAt | date : 'MMM d, y h:mm:ss a' }}"
+      noBio="{{ item.biodegradable }}"
+      noNonBio="{{ item.non_biodegradable }}" 
+      noRecyc="{{ item.recyclable }}"
+      total="{{ item.payment.amount['$numberDecimal'] }}"
+      collectorFee="{{ item.collector_fee }}"
+      collectorId="{{ item.collector_id }}"
+      bookingId="{{ item._id }}"
+      rated="{{ item.rated }}"
+      rated_rating="{{ item.rating }}"
+      rated_comment="{{ item.comment }}">
+    </app-booking-history-accordion>
+    
+    
+  </ion-accordion-group>
+  <div class="ion-margin" *ngIf="user_type == 'collector'">
+    <ion-card color="tertiary" *ngFor="let feedback of feedbacks">
+      <ion-card-header>
+        <ion-card-title>{{ feedback.rating }}★ {{ feedback.customer.fullname }}</ion-card-title>
+        <ion-card-subtitle  color="secondary">Location: {{ feedback.customer.address }}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-text color="dark">
+          Comment: 
+          <b>{{ feedback.message }}</b>
+        </ion-text>
+       
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+</ion-content>

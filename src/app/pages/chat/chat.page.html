@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="/messages"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        <ion-text color="light">
+          <h3 *ngIf="user_type == 'customer'"><b>{{ data.collector_name }}</b></h3>
+          <h3 *ngIf="user_type == 'collector'"><b>{{ data.customer_name }}</b></h3>
+        </ion-text>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #chatWindow class="chat-window" scrollEvents="true" color="primary">
+  <div *ngIf="messageList.length == 0" class="ion-text-center">
+    <br>
+    <img class="ion-margin" src="/assets/icon/Elabay.png" alt="elabay logo" width="50%">
+    <br>
+    <ion-text>No Conversations available</ion-text>
+  </div>
+  <ion-list lines="none" style="background-color: #424530;">
+    <ion-item *ngFor="let msg of messageList" class="ion-margin-top ion-text-start" color="primary">
+        <ion-text>
+          <h4><b>{{ msg.userName}}</b></h4>
+          <p class="sender-message" *ngIf="current_user == msg.userName">
+            {{ msg.message }}
+          </p>
+          <p class="receiver-message" *ngIf="current_user != msg.userName">
+            {{ msg.message }}
+          </p>
+        </ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10">
+          <ion-input placeholder="Type a message" [(ngModel)]="message"></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="full" (click)="sendMessage()">Send</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

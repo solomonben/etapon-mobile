@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-text color="light">
+        <h1>Profile</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+<ion-list class="ion-margin" lines="full" style="background-color: #424530;">
+  <ion-item color="primary">
+    <ion-icon color="tertiary" name="person-circle-outline" slot="start"></ion-icon>
+      {{ values.fullname }}
+  </ion-item>
+  <ion-item color="primary">
+    <ion-icon color="tertiary" name="mail-outline" slot="start"></ion-icon>
+      {{ values.email }}
+  </ion-item>
+  <ion-item color="primary">
+    <ion-icon color="tertiary" name="call-outline" slot="start"></ion-icon>
+      {{ values.phone }}
+  </ion-item>
+  <ion-item href="/settings" class="ion-activatable ripple-parent rectangle" color="primary">
+    <ion-icon color="tertiary" name="settings-outline" slot="start"></ion-icon>
+      Settings
+  </ion-item>
+  <ion-item (click)="logOut()" color="primary">
+    <ion-icon color="tertiary" name="log-out-outline" slot="start"></ion-icon>
+    Log out
+  </ion-item>
+
+</ion-list>
+</ion-content>

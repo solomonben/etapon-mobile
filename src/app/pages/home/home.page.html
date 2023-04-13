@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-text color="light">
+        <h1>Home</h1>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button href="/messages">
+        <ion-icon name="mail" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content color="primary">
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200"  (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <!-- CUSTOMER HOME  -->
+    <div *ngIf="user_type == 'customer'">
+      <div style="margin: 10%;">
+        <!-- NO BOOKINGS AVAILABLE -->
+        <div *ngIf="bookings == null" class="ion-text-center">
+          <ion-img class="ion-margin" src="/assets/home_picture.png"></ion-img>
+          <ion-text><h3>Feasibility. Satisfaction.</h3></ion-text>
+          <p>Safety and customer satisfaction are aour number one priority. Book for a door-to-door trash collection and we will assist you in disposing of you trash.</p>
+          <br>
+          <br>
+          <ion-button size="large" color="secondary" href="/booking-form">
+            Book Now
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+        <!-- NO BOOKINGS AVAILABLE -->
+        
+      <!-- Bookings Available -->
+      <div *ngIf="bookings != null">
+        <app-booking-slip
+        non_biodegradable="{{ bookings.non_biodegradable }}"
+        biodegradable="{{ bookings.biodegradable }}"
+        recyclable="{{ bookings.recyclable }}"
+        created_at="{{ bookings.createdAt }}"
+        payment_amount="{{ bookings.payment.amount['$numberDecimal'] }}"
+        payment_mode="{{ bookings.payment.mode.toUpperCase() }}"
+        status="{{ bookings.status }}"
+        booking_id="{{ bookings._id }}"
+        collector_name="{{ collector }}"
+        collector_number="{{ collector_number }}"
+        collector_id="{{ collector_id }}"
+        svg="{{ svg }}"
+        message="{{ message }}"
+        ></app-booking-slip>
+      </div>
+      <!-- Bookings Available -->
+    </div>
+    <!-- CUSTOMER -->
+
+    <!-- COLLECTOR -->
+    <div *ngIf="user_type == 'collector'">
+      <!-- NO BOOKINGS AVAILABLE -->
+      <div style="margin: 10%;">
+        <div *ngIf="pending_bookings == 0">
+        
+          <ion-img class="ion-margin" src="/assets/no_show_search.svg"></ion-img>
+          <ion-text><i>Sorry, no booking available</i></ion-text>
+        </div>
+      </div>
+      <!-- NO BOOKINGS AVAILABLE -->
+    <!-- Bookings Available -->
+    <div *ngIf="pending_bookings != 0">
+      <div *ngFor="let item of pending_bookings">
+        
+        <app-booking-card 
+        address="{{ item.address.house }}, {{ item.address.purok }}, {{ item.address.barangay }}, {{ item.address.city }}"
+        createdAt="{{ item.createdAt}}"
+        biodegradable="{{ item.biodegradable}}"
+        non_biodegradable="{{ item.non_biodegradable}}"
+        recyclable="{{ item.recyclable}}"
+        payment_amount="{{ item.payment.amount['$numberDecimal']}}"
+        payment_mode="{{ item.payment.mode}}"
+        booking_id="{{ item._id }}"
+        fullname="{{ item.customer.name }}"
+      ></app-booking-card>
+      </div>
+    </div>
+    
+
+    <!-- Bookings Available -->
+      
+    </div>
+    
+    <!-- COLLECTOR -->
+</ion-content>

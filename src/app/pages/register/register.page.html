@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-text color="light">
+        <h1>Registration</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <div>
+    <ion-card>
+      <ion-card-content>
+        <form (ngSubmit)="logForm()">
+          <ion-segment (ionChange)="segmentChanged($event)" value="default" color="primary">
+            <ion-segment-button value="customer">
+              <ion-label>Customer</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="collector">
+              <ion-label>Collector</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          <ion-item>
+            <ion-label position="floating">Full name</ion-label>
+            <ion-input [(ngModel)]="values.fullname" name="fullname" placeholder="Enter your full name" required="true" color="primary"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input [(ngModel)]="values.email" name="email" placeholder="Enter Email" type="email" required="true" color="primary"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Phone Number</ion-label>
+            <ion-input [(ngModel)]="values.phone" name="phone" placeholder="Enter Email" type="tel" required="true" color="primary"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input [(ngModel)]="values.password" name="password" placeholder="Enter password" type="password" required="true" color="primary"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input [(ngModel)]="values.confirmpassword" name="confirmpassword" placeholder="Re-Enter your password" type="password" required color="primary"></ion-input>
+          </ion-item>
+          <br>
+          <ion-button type="submit" color="primary" fill="solid" size="full">Register</ion-button>
+          <ion-button color="primary" fill="clear" expand="full" href="/login">Already have an account? Log in</ion-button>
+        </form>
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-text color="light">
+        <h1>Booking</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content color="primary">
+    <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200"  (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div>
+      <div *ngIf="user_type == 'customer'" class="ion-margin">
+        <canvas id="barangayCounts" width="350" height="350"></canvas>
+        <hr>
+        <canvas id="cityCounts" width="350" height="350"></canvas>
+      </div>
+      
+      
+      <div class="ion-margin" *ngIf="bookings == 0">
+        <img class="ion-margin" src="/assets/no_show_search.svg" width="80%" />
+        <ion-text class="ion-margin"><i>Sorry, no booking available</i></ion-text>
+      </div>
+
+      <div class="ion-margin" *ngIf="bookings != null">
+        
+        
+          <ion-card *ngFor="let item of bookings">
+            <ion-card-header>
+              
+              <ion-card-title> 
+                <b>{{ item.customer.name }}</b>
+              </ion-card-title>
+              <ion-card-subtitle> 
+                <ion-chip style="width: 28%; height: 50%;" color="success" *ngIf="item.status == 'picked-up'"><b><small>Picked Up</small></b></ion-chip>
+                <ion-chip style="width: 23%; height: 50%;" color="warning" *ngIf="item.status == 'booked'"><b><small>Booked</small></b></ion-chip>
+                <i>{{ item.address.house }}, {{ item.address.purok }}, {{ item.address.barangay }}</i>
+              </ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              
+              <ion-grid class="ion-margin-start ion-margin-end">
+                <ion-row>
+                  <ion-col>
+                    <ion-text color="dark">
+                      Biodegradable
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark" >
+                      <b>{{ item.biodegradable }} x 100</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-text color="dark">
+                      Non-Biodegradable
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark">
+                      <b>{{ item.non_biodegradable }} x 100</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-text color="dark">
+                      Recyclable
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark">
+                      <b>{{ item.recyclable }} x 100</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-text color="dark">
+                      Delivery Fee
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark">
+                      <b>50</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-text color="dark">
+                      TOTAL
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark">
+                      <b>{{ item.payment.amount['$numberDecimal'] }}</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-margin-top">
+                  <ion-col>
+                    <ion-text color="dark">
+                      Payment Method
+                    </ion-text>
+                  </ion-col>
+                  <ion-col class="ion-text-end" size="auto">
+                    <ion-text color="dark">
+                      <b>{{ item.payment.mode.toUpperCase() }}</b>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-button *ngIf="item.status == 'booked'" color="primary" size="small" (click)="pickupBooking(item._id)">Pick up</ion-button>
+              <ion-button *ngIf="item.status == 'picked-up'" color="success" size="small" (click)="disposeBooking(item._id)">Dispose</ion-button>
+              <ion-button color="secondary" size="small">Message</ion-button>
+              <ion-button color="danger" size="small" (click)="cancelBooking(item._id)">Cancel</ion-button>
+            </ion-card-content>
+          
+            
+          </ion-card>
+         
+        
+      </div>
+    </div>
+    
+</ion-content>

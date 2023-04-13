@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="/tabs/tabs/home"></ion-back-button>
+    </ion-buttons>
+      <ion-title>
+        <ion-text color="light">
+          <h2><b>Messages</b></h2>
+        </ion-text>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <ion-refresher slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200"  (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="conversations == null">
+    <div style="margin: 15%;">
+    <!-- NO BOOKINGS AVAILABLE -->
+      <ion-img class="ion-margin" src="/assets/no_message.svg"></ion-img>
+      <ion-text><i>There were no conversations.</i></ion-text>
+    </div>
+  </div>
+  <div *ngIf="conversations == null" class="ion-text-center">
+    <ion-img class="ion-margin" src="/assets/icon/Elabay.png"></ion-img>
+    <ion-text>No Conversations available</ion-text>
+  </div>
+  <ion-list *ngIf="conversations != null" lines="full" style="background-color: #424530;">
+
+      
+      <ion-item  (click)="navigateToChat(conversation)" class="ion-activatable ripple-parent circle" *ngFor="let conversation of conversations" color="primary">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon  name="person" size="large" slot="start" color="tertiary"></ion-icon>
+        <ion-label>
+          <h5 *ngIf="user_type == 'customer'"><b>{{ conversation.collector_name }}</b></h5>
+          <h5 *ngIf="user_type == 'collector'"><b>{{ conversation.customer_name }}</b></h5>
+          <small><i>{{ conversation.updatedAt | date : 'MMM d, y h:mm:ss a' }}</i></small>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+
+    
+  </ion-list>
+</ion-content>

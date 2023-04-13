@@ -1,0 +1,89 @@
+<ion-card>
+  <ion-card-header>
+    <ion-text class="ion-margin" color="dark"><b><ion-icon name="location"></ion-icon> {{ address }}</b></ion-text>
+    <ion-card-subtitle>
+      <ion-text class="ion-margin" color="dark">
+        Customer: <b>{{ fullname }}</b>
+      </ion-text>
+      
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text color="dark">
+            Biodegradable
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end" size="auto">
+          <ion-text color="dark">
+            <b>{{ biodegradable }} x 100</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="dark">
+            Non-Biodegradable
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end" size="auto">
+          <ion-text color="dark">
+            <b>{{ non_biodegradable }} x 100</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="dark">
+            Recyclable
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end"  size="auto">
+          <ion-text color="dark">
+            <b>{{ recyclable }} x 100</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="dark">
+            Delivery Fee
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end" size="auto">
+          <ion-text color="dark">
+            <b>50</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="dark">
+            TOTAL
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end" size="auto">
+          <ion-text color="dark">
+            <b>{{ payment_amount }}</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-text color="dark">
+            Payment Method
+          </ion-text>
+        </ion-col>
+        <ion-col class="ion-text-end" size="auto">
+          <ion-text color="dark">
+            <b>{{ payment_mode.toUpperCase() }}</b>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button color="primary" size="full" (click)="pickUpBooking(booking_id)">Book</ion-button>
+  </ion-card-content>
+</ion-card>

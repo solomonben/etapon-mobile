@@ -1,0 +1,83 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="/tabs/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title> 
+      <ion-text color="light">
+        <h1> Settings</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <form (ngSubmit)="updateInfos()" class="ion-margin">
+    <ion-text>
+      <h3>Personal Information</h3>
+    </ion-text>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked"><b>Fullname:</b></ion-label>
+          <ion-input value="{{ values.fullname }}" [(ngModel)]="values.fullname" name="fullname" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"><b>Email:</b></ion-label>
+          <ion-input value="{{ values.email }}" [(ngModel)]="values.email" name="email" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"><b>Phone Number:</b></ion-label>
+          <ion-input value="{{ values.phone_number }}" [(ngModel)]="values.phone_number" name="phone" type="text"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <br>
+    <div *ngIf="user_type == 'customer'">
+      <ion-text>
+        <h3>Address</h3>
+      </ion-text> 
+      <div class="ion-margin">
+        <ion-text *ngIf="addressCheck()" color="danger">
+          <ion-icon name="warning"></ion-icon>
+          Must update Address before booking a garbage pickup
+        </ion-text>
+      </div>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked"><b>House: </b></ion-label>
+            <ion-input placeholder="Enter your house details" value="{{ values.address.house }}" [(ngModel)]="values.address.house" name="house" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked"><b>Purok:</b></ion-label>
+            <ion-input placeholder="Enter your Purok" value="{{ values.address.purok }}" [(ngModel)]="values.address.purok" name="purok" type="text"></ion-input>
+          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-label>Barangay: </ion-label>
+              <ion-select value="{{ values.address.barangay }}" interface="action-sheet" placeholder="Select" [(ngModel)]="values.address.barangay" name="barangay">
+                <ion-select-option *ngFor="let barangay of barangays" value="{{barangay}}">
+                  {{ barangay }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label position="stacked"><b>City:</b></ion-label>
+            <ion-input value="{{ values.address.city }}" [(ngModel)]="values.address.city" name="city" type="text"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      
+      
+      
+      
+    </div>
+    <br>
+    <ion-button type="submit" color="tertiary" fill="solid" size="full">Update Information</ion-button>
+    
+  </form>
+  
+
+</ion-content>

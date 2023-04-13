@@ -1,0 +1,7 @@
+{
+  "name": "eTapon-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
