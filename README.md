@@ -31,6 +31,6 @@ Mobile Application for Grabage disposal services
 
 #### Splash
 <p float="left">
-  <img src="/resources/splash.png"  width="360" height="600">
-  <img src="/resources/splash.png"  width="360" height="600">
+  <img src="/resources/splash.png"  width="280" height="512">
+  <img src="/resources/splash.png"  width="280" height="512">
 </p>
