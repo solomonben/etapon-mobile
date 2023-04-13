@@ -30,4 +30,4 @@ Mobile Application for Grabage disposal services
 <img src="/resources/icon.png"  width="200" height="200">
 
 #### Splash
-<img src="/resources/splash.png"  width="300" height="720">
+<img src="/resources/splash.png"  width="300" height="650">
