@@ -42,7 +42,7 @@ Mobile Application for Grabage disposal services
 <img src="/Screenshots/registration.png"  width="280" height="500">
 
 #### Home
-<img src="/Screenshots/home.png"  width="280" height="500">
+<img src="/Scrennshots/home.png"  width="280" height="500">
 
 #### Booking Form
 <img src="/Screenshots/booking_form.png"  width="280" height="500">
